@@ -1,0 +1,50 @@
+#contacts{
+    padding-bottom: 150px;
+    width: 92%;
+    margin-left: 4%;
+}
+
+
+.contact{
+    display: flex;
+    background-color: rgb(220, 220, 220);
+    border: none;
+    border-radius: 12px;
+    padding: 1.5vh;
+    height: 4vh;
+    color: #4d4d4d;
+    cursor: pointer;
+    margin: 20px;
+    margin-left: 0px;
+    font-size: 3.5vh;
+}
+.contact .icon{
+    position: relative;
+    top: -0.5vh;
+    width: 5vh;
+    height: 5vh;
+    margin: 0px;
+    margin-right: 1vw;
+}
+.contact p{
+    margin: 0px;
+}
+
+@media (pointer:none), (pointer:coarse) {
+    #contacts{
+        padding-bottom: 5vw;
+    }
+    .contact{
+        font-size: 4vw;
+        padding: 1vw;
+        margin: 10px;
+    }
+    .contact .icon{
+        top: 0.7vw;
+        width: 5vw;
+        height: 5vw;
+    }
+    .contact p{
+        margin-top: 1vw;
+    }
+}

@@ -1,0 +1,150 @@
+.Date{
+    background-color: rgb(240, 240, 240);
+    border-radius: 10px;
+    width: 10%;
+    height: 7%;
+    margin: 0.5%;
+    cursor: pointer;
+    font-size: 2.5vh;
+}
+.Date:hover{
+    background-color: rgb(210, 210, 210);
+    transition: .2s;
+}
+
+.bookedForm{
+    width: 40%;
+    height: 50%;
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 1600px rgba(0,0,0,0.3);
+    padding: 3%;
+    border-radius: 25px;
+    z-index: 3223;
+    font-size: 2.5vh;
+    display: flex;
+    justify-content: center;
+}
+.bookedForm input{
+    padding: 7px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding-right: 0px;
+}
+.bookedForm button{
+    background: linear-gradient(to bottom right, #d907e6, 70%, #f666ff);
+    border: none;
+    border-radius: 5px;
+    padding: 1.5vh;
+    height: 7vh;
+    width: 102%;
+    margin-top: 4vh;
+    color: white;
+    cursor: pointer;
+}
+.bookedForm button:hover{
+    filter: brightness(80%);
+    transition: .2s;
+}
+
+.navDate{
+    width: 45%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    border: 2px solid rgb(240, 240, 240);
+    text-align: center;
+    border-radius: 0px 0px 10px 10px;
+    padding: 10px;
+}
+.navDate button{
+    position: relative;
+    top: 50%;
+    transform: translate(0%, -50%);
+    background-color: white;
+    border: none;
+    font-size: 4vh;
+    margin-right: 50%;
+    cursor: pointer;
+}
+
+.back2ServicePage{
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    background-color: rgb(200 ,200, 200);
+    width: 25px;
+    height: 25px;
+    border: none;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.back2ServicePage a{
+    vertical-align: middle;
+}
+
+.container4dates{
+    width: 40%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.time{
+    background-color: rgb(240, 240, 240);
+    padding: 10px 30px;
+    border-radius: 10px;
+    color: rgb(100, 100, 100);
+    font-size: 3vh;
+    cursor: pointer;
+    margin: 10px;
+    margin-right: 1px;
+}
+.time:hover{
+    background-color: rgb(200, 200, 200);
+}
+
+.activeDate{
+    background-color: #226ef8;
+    color: white;
+    pointer-events: none;
+}
+
+@media (pointer:none), (pointer:coarse) {
+    .container4dates{
+        width: 90%;
+    }
+
+    .Date{
+        width: 13vw;
+        height: 19vw;
+        margin: 1vw;
+    }
+    .Date:hover{
+        background-color: #226ef8;
+    }
+
+    .bookedForm{
+        width: 70%;
+        height: auto;
+        font-size: 4.5vw;    
+    }
+    .bookedForm input{
+        padding: 2vw;
+    }
+    .bookedForm button{
+        padding: 3vw;
+        height: 9vw;
+        width: 102%;
+        margin-top: 4vw;
+    }
+    .navDate{
+        width: 90vw;
+    }
+}
