@@ -87,7 +87,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+'''
 LOGGING = {
     "version": 1,
     "disabled_existing_loggers": False,
@@ -119,8 +119,8 @@ LOGGING = {
         }
     },
 }
-
-
+'''
+'''
 logger = logging.getLogger('main')
 logger.setLevel(logging.DEBUG)
 handler = logging.StreamHandler(sys.stderr)
@@ -128,7 +128,7 @@ handler.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(levelname)-8s %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
-
+'''
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'

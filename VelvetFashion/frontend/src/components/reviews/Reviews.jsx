@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from "react";
-import Review from "./Review";
+import React, { useState, useEffect } from "react";
+import { Review } from "./Review/Review";
 import { BrowserView, MobileView } from 'react-device-detect';
-import "./Reviews.css";
+import styles from "./Reviews.module.scss";
 
 
-const Reviews = () => {
+export const Reviews = () => {
     const [allReviews, setReviews] = useState([]);
 
     function getReviews(){
@@ -16,44 +16,41 @@ const Reviews = () => {
             }
         }
 
-        xhttp.open("GET", "/getReviews");
+        xhttp.open("GET", "/get-reviews");
         xhttp.send();
     }
 
-    let count = 0;
-    let len = 0;
-    for (let i = 0; i < allReviews.length; i++){
-        count += allReviews[i].estimation;
-        len++;
-    }
+
+    let count = allReviews.map(review => review.estimation).reduce((partialSum, a) => partialSum + a, 0);
+    const len = allReviews.length;
 
     count = Math.round(count / len * 10) / 10;
     useEffect(getReviews, []);
 
     return (
-        <div id="reviews" >
+        <div id={styles.reviews} >
             <div style={{ width: "90%", marginLeft: "4%" }}>
                 <BrowserView>
                     <h3 style={{ color: "black", fontSize: "3vw" }}>Отзывы</h3>
                 </BrowserView>
+
                 <MobileView>
-                    <div style={{ verticalAlign: "middle" }} >
-                        <h3 style={{ color: "black", fontSize: "6vw", position: "relative", top: "50%", transform: "translate(0%, -50%)", margin: "0px" }} >Отзывы</h3>
-                    </div>
+                    <h3 style={{ color: "black", fontSize: "6vw", position: "relative", top: "50%", transform: "translate(0%, -50%)", margin: "0px" }} >Отзывы</h3>
                 </MobileView>
+                
                 <div style={{ display: "flex" }}>
                     <div style={{ display: "table", marginRight: "2vw"  }}>
                         <h3 style={{ display: "table-cell", fontSize: "6vh", marginRight: "2vw" }} >{ count }</h3>
                     </div>
-                    <div>
-                        <div style={{ display: "flex", verticalAlign: "center" }} >
-                            <img style={{ position: "relative", marginTop: "4vh" }} width="20px" height="20px" src="static/img/yellow.png" />
-                            <img style={{ position: "relative", marginTop: "4vh" }} width="20px" height="20px" src="static/img/yellow.png" />
-                            <img style={{ position: "relative", marginTop: "4vh" }} width="20px" height="20px" src="static/img/yellow.png" />
-                            <img style={{ position: "relative", marginTop: "4vh" }} width="20px" height="20px" src="static/img/yellow.png" />
-                            <img style={{ position: "relative", marginTop: "4vh" }} width="20px" height="20px" src="static/img/yellow.png" />
+                    <div className={styles.star__rate}>
+                        <div>
+                            <img src="static/img/yellow.png" />
+                            <img src="static/img/yellow.png" />
+                            <img src="static/img/yellow.png" />
+                            <img src="static/img/yellow.png" />
+                            <img src="static/img/yellow.png" />
                         </div>
-                        <p style={{ fontSize: "2.5vh" }} ><a>{ len }</a><a style={{ marginLeft: "5px"}} >Отзыва</a></p>
+                        <p><a>{ len }</a><a>Отзыва</a></p>
                     </div>
                 </div>
 
@@ -65,7 +62,7 @@ const Reviews = () => {
                                     <Review review={review} />
                                     )
                             ) : (
-                                <h4></h4>
+                                <></>
                             )}
                         </div>
                         <div style={{ display: "flex", flexDirection: "column", width: "50%" }} >
@@ -74,7 +71,7 @@ const Reviews = () => {
                                     <Review review={review} />
                                     )
                             ) : (
-                                <h4></h4>
+                                <></>
                             )}
                         </div>
                     </div>
@@ -87,7 +84,7 @@ const Reviews = () => {
                                 <Review review={review} />
                                 )
                         ) : (
-                            <h4></h4>
+                            <></>
                         )}
                     </div>
                 </MobileView>
@@ -96,5 +93,3 @@ const Reviews = () => {
         </div>
     );
 };
-
-export default Reviews;

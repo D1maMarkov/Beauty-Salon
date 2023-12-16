@@ -1,11 +1,16 @@
 import React from "react";
+import styles from "./Footer.module.scss";
 
-const Footer = () => {
-   return (
-        <div style={{ width: "100%", height: "18vh", color: "white", backgroundColor: "rgb(190, 190, 190)", textAlign: "center" }}>
-            <p style={{ paddingTop: "5vh" }} >©2023 салон красоты "Velvet Fashion"</p>
-        </div>
+export const Footer = () => {
+    function up(){
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+
+    return (
+        <footer>
+            <p>©2023 салон красоты "Velvet Fashion"</p>
+
+            <button onClick={up} ><a>{"<"}</a></button>
+        </footer>
     );
 };
-
-export default Footer;

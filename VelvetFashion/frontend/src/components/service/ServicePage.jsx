@@ -1,25 +1,24 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Footer from "../footer/Footer";
-import Topnav from "../topnav/topnav";
-import Contacts from "../contacts/Contacts";
-import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
-import "./Service.css";
+import { Footer } from "../footer/Footer";
+import { Topnav } from "../topnav/topnav";
+import { Contacts } from "../contacts/Contacts";
+import { isBrowser } from 'react-device-detect';
+import { MasterOnServesPage } from "./master/master";
+import { useGetService } from "../../hooks/useGetService";
+import styles from "./Service.module.scss";
 
 
-const ServicePage = () => {
+export const ServicePage = () => {
     document.body.style.backgroundColor = "rgb(245, 245, 245)";
 
-    let navigate = useNavigate();
-    function go2Master(id){
-        navigate("/master/" + id);
-    }
+    const navigate = useNavigate();
 
-    let params = useParams();
+    const params = useParams();
 
-    let category = params.category;
-    let title = params.title;
-    let price = params.price;
+    const serviceId = params.id;
+    
+    const service = useGetService(serviceId);
 
     const [masters, setMasters] = useState([]);
 
@@ -31,115 +30,53 @@ const ServicePage = () => {
                 setMasters(xhttp.response);
             }
         }
-        xhttp.open("GET", "/getMasters/" + category);
+        xhttp.open("GET", "/get-masters/" + service.category.id);
         xhttp.send();
     }
 
-    function go2Dates(){
-        navigate("/createNotation/" + title);
-    }
-
-
     useEffect(() => {
-        getMasters();
-        document.title = title;
-    }, []);
+        if (service != null){
+            getMasters();
+            document.title = service.title;
+        }
+    }, [service]);
     
     return (
-        <div>
-            <BrowserView>
+        <>
+            {isBrowser ? (
                 <Topnav />
-            </BrowserView>
-
-            <BrowserView>
-                <div style={{ marginTop: "12vh", marginLeft: "10%", display: "flex", justifyContent: "space-between", paddingBottom: "15vh" }}>
+            ):(<></>)}
+            
+            {service != null ? (
+                <div className={isBrowser ? styles.content__desktop : styles.content__mobile}>
                     <div>
-                        <div onClick={e => navigate(-1)} id="back2catalog" >
+                        <div onClick={() => navigate(-1)} id={styles.back__to__catalog} >
                             <a style={{ fontSize: "5vh" }} >{"<"}  </a>
                             <a style={{ marginLeft: "10px" }} ><b>Каталог</b></a>
                         </div>
-                        <div className="serviceDescription">
-                            <p style={{ fontSize: "4vh", color: "rgb(200, 200, 200)", fontWeight: "normal" }} >{ category }</p>
-                            <p style={{ fontSize: "5vh" }} >{ title }</p>
-                            <p style={{ fontSize: "6vh" }}>{price} ₽</p>
+
+                        <div className={styles.service__description}>
+                            <p style={{ fontSize: "4vh", color: "rgb(200, 200, 200)", fontWeight: "normal" }} >{ service.category.title }</p>
+                            <p style={{ fontSize: "5vh" }} >{ service.title }</p>
+                            <p style={{ fontSize: "6vh" }}>{ service.price } ₽</p>
                         </div>
                     </div>
 
-                    <div style={{ marginTop: "20vh", marginRight: "10%" }} >
+                    <div style={{ marginTop: isBrowser ? "20vh" : "13vh", marginRight: "10%" }} >
                         <a style={{ fontSize: "5vh" }} >Специалисты для записи</a>
                         <div style={{ marginTop: "3vh" }}>
                             {masters.map(master => (
-                            <div className="master4booked">
-                                <div style={{ display: "flex" }}>
-                                    <img id="masterImg4booked" src={master.photo} />
-                                    <div style={{ marginLeft: "10px" }} >
-                                        <p style={{ fontWeight: "bold", marginBottom: "0px" }} >{master.name}</p>
-                                        <p style={{ marginTop: "5px", marginBottom: "5px" }} >{master.profession}</p>
-                                        <div style={{ verticalAlign: "middle" }} >
-                                            <img className="star" src="/static/img/yellow.png" />
-                                            <a><b>5.0</b></a><a style={{ marginLeft: "10px" }} >1 оценкa </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <button onClick={go2Dates} className="bookedButton" >Записаться</button>
-                                <div onClick={() => go2Master(master.id)} className="detailed" ><a>i</a></div>
-                            </div>
+                                <MasterOnServesPage master={master} service={service} />
                             ))}
                         </div>
                     </div>
                 </div>
-            </BrowserView>
-
-            <MobileView>
-                <div style={{ marginTop: "5vh", marginLeft: "10%", paddingBottom: "15vw" }}>
-                    <div>
-                        <div onClick={e => navigate(-1)} id="back2catalog" >
-                            <a style={{ fontSize: "5vh" }} >{"<"}  </a>
-                            <a style={{ marginLeft: "10px" }} ><b>Каталог</b></a>
-                        </div>
-                        <div className="serviceDescription">
-                            <p style={{ fontSize: "4vh", color: "rgb(200, 200, 200)", fontWeight: "normal" }} >{ category }</p>
-                            <p style={{ fontSize: "5vh" }} >{ title }</p>
-                            <p style={{ fontSize: "6vh" }}>{price} ₽</p>
-                        </div>
-                    </div>
-
-                    <div style={{ marginTop: "15vw", marginRight: "10%" }} >
-                        <a style={{ fontSize: "5vh" }} >Специалисты для записи</a>
-                        <div style={{ marginTop: "3vh" }}>
-                            <div className="master4booked">
-                            {masters.map(master => (
-                            <div className="master4booked">
-                                <div style={{ display: "flex" }}>
-                                    <img id="masterImg4booked" src={master.photo} />
-                                    <div style={{ marginLeft: "10px" }} >
-                                        <p style={{ fontWeight: "bold", marginBottom: "0px" }} >{master.name}</p>
-                                        <p style={{ marginTop: "5px", marginBottom: "5px" }} >{master.profession}</p>
-                                        <div style={{ verticalAlign: "middle" }} >
-                                            <img className="star" src="/static/img/yellow.png" />
-                                            <a><b>5.0</b></a><a style={{ marginLeft: "10px" }} >1 оценкa </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <button onClick={go2Dates} className="bookedButton" >Записаться</button>
-                                <div onClick={go2Master} className="detailed" ><a>i</a></div>
-                            </div>
-                            ))}
-
-                                <button onClick={go2Dates} className="bookedButton" >Записаться</button>
-                                <div onClick={go2Master} className="detailed" ><a>i</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </MobileView>
+            ):(
+                <></>
+            )}
 
             <Contacts />
             <Footer />
-        </div>
+        </>
     );
 };
-
-export default ServicePage;

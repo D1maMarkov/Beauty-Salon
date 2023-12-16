@@ -1,0 +1,96 @@
+.master__for__booked{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    width: 40vw;
+    border-radius: 15px;
+    padding: 5px;
+    box-shadow: -1px 1px 6px 3px rgba(150, 150, 150, .2);
+
+    #master__img__for__booked{
+        height: 10vh;
+        width: 10vh;
+        margin: 1vh;
+        border-radius: 50%;
+        margin-right: 15px;
+    }
+}
+
+.star{
+    position: relative;
+    top: 0.5vh;
+    width: 3vh;
+    height: 3vh;
+    margin-right: 5px;
+}
+
+.booked__button{
+    background: linear-gradient(to bottom right, #d907e6, 70%, #f666ff);
+    border: none;
+    border-radius: 5px;
+    padding: 1.5vh;
+    height: 5vh;
+    margin: 5vh;
+    color: white;
+    cursor: pointer;
+
+    &:hover{
+        background: linear-gradient(to bottom right, #890091, 70%, #d907e6);
+        transition: 0.3s;
+    }
+}
+
+.detailed{
+    position: absolute;
+    width: 3vh;
+    height: 3vh;
+    top: 2vh;
+    right: 2vh;
+    font-style: italic;
+    border: 2px solid gray;
+    border-radius: 50%;
+    font-size: 2.5vh;
+    color: gray;
+    text-align: center;
+    cursor: pointer;
+
+    a{
+        margin-right: 0.25vh
+    }
+}
+
+@media (pointer:none), (pointer:coarse) {
+    .detailed{
+        width: 3vw;
+        height: 3vw;
+        top: 2vw;
+        right: 2vw;
+        font-size: 2.5vw;
+
+        a{
+            right: 0.25vw;
+        }
+    }
+    .booked__button{
+        width: 17vw;
+        font-size: 2.3vw;
+    }
+    .star{
+        top: 1vw;
+        width: 3.5vw;
+        height: 3.5vw;
+    }
+
+    #master__img__for__booked{
+        height: 15vw;
+        width: 15vw;
+        margin: 2vw;
+    }
+
+    .master__for__booked{
+        height: 22vw;
+        width: 85vw;
+        font-size: 3vw;
+    }
+}

@@ -1,0 +1,37 @@
+.review{
+    width: 100%;
+    display: flex;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: -3px 3px 6px 3px rgba(150, 150, 150, .4);
+    margin: 2%;
+    max-height: 80%;
+    padding-bottom: 30px;
+
+    .review__img{
+        margin: 3%;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.review__body{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+
+    p{
+        margin-bottom: 0px;
+    }
+
+    .star__rate{
+        display: flex;
+    
+        img{
+            margin-top: 2.5vh;
+            width: 15px;
+            height: 15px;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+.time{
+    background-color: rgb(240, 240, 240);
+    padding: 10px 30px;
+    border-radius: 10px;
+    color: rgb(100, 100, 100);
+    font-size: 3vh;
+    cursor: pointer;
+    margin: 10px;
+    margin-right: 1px;
+
+    &:hover{
+        background-color: rgb(200, 200, 200);
+    }
+}
+
+.time__wrapper{
+    display: flex;
+    width: 50vw;
+    flex-wrap: wrap;
+}
+
+.container__for__dates{
+    width: 45%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.time__disabled{
+    opacity: .6;
+    pointer-events: none;
+}
+
+
+@media (pointer:none), (pointer:coarse) {
+    .container__for__dates{
+        width: 90%;
+    }
+
+    .time__wrapper{
+        width: 100vw;
+    }
+}

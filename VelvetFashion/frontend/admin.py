@@ -11,8 +11,8 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 @admin.register(Notation)
 class NotationAdmin(admin.ModelAdmin):
-    list_display = ['service', 'time', 'name', 'secondname', 'phone']
-    list_editable = ['service', 'time', 'name', 'secondname', 'phone']
+    list_display = ['service', 'time', "month", "date", 'name', 'secondname', 'phone']
+    list_editable = ['service', 'time', "month", "date", 'name', 'secondname', 'phone']
     list_display_links = None
 
 @admin.register(Reviews)
@@ -21,8 +21,8 @@ class ReviewsAdmin(admin.ModelAdmin):
     list_editable = ['username', 'body', 'estimation', 'date']
     list_display_links = None
 
-@admin.register(Review2Master)
-class Reviews2MasterAdmin(admin.ModelAdmin):
+@admin.register(ReviewToMaster)
+class ReviewsToMasterAdmin(admin.ModelAdmin):
     list_display = ['username', 'master', 'body', 'estimation', 'date']
     list_editable = ['username', 'master', 'body', 'estimation', 'date']
     list_display_links = None
@@ -40,7 +40,7 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display_links = None
     
 @admin.register(Category)
-class ServiceAdmin(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title']
     list_editable = ['title']
     list_display_links = None

@@ -1,18 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { isMobile } from 'react-device-detect';
-import "./MobileBooked.css";
+import styles from "./MobileBooked.module.scss";
 
 
 const MobileBooked = () => {
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
+
     function bookedOnline(){
         navigate("/bookedOnline");
     }
 
     return (
-        isMobile ? <button onClick={bookedOnline} id="MobileBooked" >Записаться онлайн</button> : <></>
+        isMobile ? <button onClick={bookedOnline} id={styles.mobile__booked}>Записаться онлайн</button> : <></>
     );
 };
 

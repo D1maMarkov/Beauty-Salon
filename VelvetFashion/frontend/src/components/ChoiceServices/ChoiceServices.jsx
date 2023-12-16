@@ -1,16 +1,16 @@
 import React, { useState, useEffect} from "react";
-import ChoiceService from "./ChoiceService";
-import Topnav from "../topnav/topnav";
-import Footer from "../footer/Footer";
-import Contacts from "../contacts/Contacts";
-import "./ChoiceService.css";
+import { ChoiceService } from "./ChoiceService";
+import { Topnav } from "../topnav/topnav";
+import { Footer } from "../footer/Footer";
+import { Contacts } from "../contacts/Contacts";
+import styles from "./ChoiceService.module.scss";
 
 
-function ChoiceServices() {
+export const ChoiceServices = () => {
     document.body.style.backgroundColor = "rgb(230, 230, 230)";
 
-    const [AllServices, setAllServices] = useState([]);
-    const [Services, setServices] = useState([]);
+    const [allServices, setAllServices] = useState([]);
+    const [services, setServices] = useState([]);
 
     function getServices(){
         let xhttp = new XMLHttpRequest();
@@ -20,41 +20,39 @@ function ChoiceServices() {
                 setAllServices(xhttp.response);
             }
         }
-        xhttp.open("GET", "/getServices");
+        xhttp.open("GET", "/get-services");
         xhttp.send();
     }
 
     function Filter(value){
-        const newServices = [...AllServices].filter(service => service.title.toLowerCase().includes(value.toLowerCase()) || service.category.title.toLowerCase().includes(value.toLowerCase()) );
+        const newServices = [...allServices].filter(service => service.title.toLowerCase().includes(value.toLowerCase()) || service.category.title.toLowerCase().includes(value.toLowerCase()));
         setServices(newServices);
     }
 
-    useEffect(() => getServices(), []);
-    useEffect(() => setServices(AllServices), [AllServices]);
+    useEffect(getServices, []);
+    useEffect(() => setServices(allServices), [allServices]);
 
     return (
-         <div>
+         <>
             <Topnav />
-            <input class="search" onChange={e => Filter(e.target.value)} placeholder="Искать..." />
+            <input className={styles.search} onChange={e => Filter(e.target.value)} placeholder="Искать..." />
 
-            {Services.length > 0 ? (
-                <div className="container4ChoiceServices">
+            {services.length > 0 ? (
+                <div className={styles.container__for__choice__services}>
                     <div style={{ display: "flex" }}>
-                        <a id="text4services" >Услуги</a><a id="text4services2" > ({Services.length})</a>
+                        <a id={styles.text__for__services}>Услуги</a><a id={styles.text__for__services2} > ({services.length})</a>
                      </div>
-                     {Services.map(service =>
+                     {services.map(service =>
                         <ChoiceService service={service} />
                      )}
                 </div>
              )
              : (
-                <h2 style={{ textAlign: "center", marginBottom: "20vh" }} >Таких услуг нет в ассортименте</h2>
+                <h2 className={styles.not__found}>Таких услуг нет в ассортименте</h2>
              )}
 
              <Contacts />
              <Footer />
-         </div>
+         </>
     );
 }
-
-export default ChoiceServices;

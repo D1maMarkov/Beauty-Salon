@@ -1,0 +1,138 @@
+.search{
+    padding: 15px;
+    width: 80%;
+    margin-top: 8%;
+    margin-bottom: 7%;
+    border-radius: 10px;
+    border: 2px solid gray;
+    margin-left: calc(10% - 15px);
+}
+
+.container__for__choice__services{
+    width: 80%;
+    margin-left: 10%;
+    background-color: white;
+    padding: 25px 0px;
+    border-radius: 30px;
+    margin-bottom: 20vh;
+}
+
+.not__found{
+    text-align: center;
+    margin-bottom: 20vh;
+}
+
+#text__for__services{
+    font-size: 4vh;
+    font-weight: bold;
+    margin-left: 5vh;
+    display: block;
+    margin-bottom: 4vh;
+}
+
+#text__for__services2{
+    color: rgb(200, 200, 200);
+    font-size: 4vh;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4vh;
+}
+
+.choice__service{
+    display: flex;
+    justify-content: space-between;
+    height: 20vh;
+    width: 100%;
+    font-size: 3vh;
+    background-color: white;
+
+    img{
+        height: 16vh;
+        aspect-ratio: 1/1;
+        margin: 2vh;
+        margin-bottom: 0;
+        pointer-events: none;
+        border-radius: 3px;
+    }
+
+    .choice__service__right{
+        display: flex;
+        width: 35%;
+        justify-content: space-between;
+
+        p{
+            margin-top: 8vh;
+        }
+
+        button{
+            height: 6vh;
+            width: 17vh;
+            background-color: #d740e1;
+            color: white;
+            margin: 6.5vh;
+            border-radius: 5px;
+            border: none;
+        
+            &:hover{
+                cursor: pointer;
+                filter: brightness(80%);
+            }
+        }
+    }
+
+}
+
+
+@media (pointer:none), (pointer:coarse) {
+    .search{
+        margin-top: 20vw;
+        font-size: 3vw;
+    }
+
+    .container__for__choice__services{
+        margin-bottom: 20vw;
+        width: 90%;
+        margin-left: 5%;
+        padding: 15px 0px;
+        border-radius: 20px;
+    }
+
+    #text__for__services{
+        font-size: 5vw;
+        margin-left: 5vw;
+        margin-bottom: 4vw;
+    }
+    
+    #text__for__services2{
+        font-size: 5vw;
+        margin-bottom: 4vw;
+    }
+
+    .choice__service{
+        height: 23vw;
+        font-size: 4vw;
+
+        img{
+            height: 19vw;
+            margin: 3vw;
+            margin-bottom: 0;
+        }
+    
+        .choice__service__right{
+            width: 40%;
+    
+            p{
+                margin-top: 8vw;
+            }
+    
+            button{
+                height: 7vw;
+                width: 18vw;
+                margin: 7vw;
+                margin-left: 0;
+                font-size: 2.5vw;
+                margin-right: 2vw;
+            }
+        }
+    }
+}

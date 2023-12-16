@@ -1,0 +1,62 @@
+.content__desktop{
+    margin-top: 12vh;
+    margin-left: 10%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15vh;
+}
+
+.content__mobile{
+    margin-top: 5vh;
+    margin-left: 10%;
+    padding-bottom: 15vw;
+}
+
+.service{
+    width: 22%;
+    aspect-ratio: 3/4;
+    margin: 1.5%;
+    background-color: rgb(200, 200, 200);
+    border-radius: 15px;
+    font-size: 1.1em;
+    cursor: pointer;
+
+    img{
+        width: 90%;
+        aspect-ratio: 1/1;
+        margin: 5%;
+        margin-bottom: 0;
+        pointer-events: none;
+    }
+
+    div{
+        width: 90%;
+        margin-left: 6%;
+    }
+}
+
+.service__description{
+    margin-top: 7vh;
+
+    p{
+        font-weight: bold;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+    
+}
+
+#back__to__catalog{
+    cursor: pointer;
+
+    a{
+        vertical-align: middle;
+    }
+}
+
+@media (pointer:none), (pointer:coarse) {
+    .service{
+        min-width: 41vw;
+        font-size: 1.3em;
+    }
+}

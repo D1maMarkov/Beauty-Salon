@@ -1,17 +1,20 @@
 import React from "react";
-import {Link} from "react-scroll";
-import { useNavigate, useParams } from "react-router-dom";
-import { BrowserView, MobileView, isBrowser } from 'react-device-detect';
-import "./topnav.css";
+import { Link } from "react-scroll";
+import { useNavigate } from "react-router-dom";
+import { BrowserView, isBrowser } from 'react-device-detect';
+import styles from "./topnav.module.scss";
+import stylesCatalog from "../catalog/catalog.module.scss";
+import stylesReviews from "../reviews/Reviews.module.scss";
+import stylesImages from "../images/Images.module.scss";
+import stylesContacts from "../contacts/Contacts.module.scss";
 
 
-const TopNav = () => {
-    let navigate = useNavigate();
+export const Topnav = () => {
+    const navigate = useNavigate();
 
     function bookedOnline(){
-        navigate("/bookedOnline");
+        navigate("/booked-online");
     }
-
    
     window.addEventListener('click', function(e){
         if (document.getElementById("write").contains(e.target)){
@@ -25,23 +28,20 @@ const TopNav = () => {
             }
         }
         else if (document.getElementById("call").contains(e.target)){
-                let current = document.getElementById("phoneNumber").style.display;
-                if (current == "none"){
-                    document.getElementById("messageMenu").style.display = "none";
-                    document.getElementById("phoneNumber").style.display = "block";
-                }
-                else{
-                    document.getElementById("phoneNumber").style.display = "none";
-                }
-        }
-        else{
-            if (document.getElementById("messageMenu").contains(e.target)){
-                let a = 2;
+            let current = document.getElementById("phoneNumber").style.display;
+            if (current == "none"){
+                document.getElementById("messageMenu").style.display = "none";
+                document.getElementById("phoneNumber").style.display = "block";
             }
             else{
-                document.getElementById("messageMenu").style.display = "none";
-
+                document.getElementById("phoneNumber").style.display = "none";
             }
+        }
+        else{
+            if (!document.getElementById("messageMenu").contains(e.target)){
+                document.getElementById("messageMenu").style.display = "none";
+            }
+          
             if (document.getElementById("phoneNumber").contains(e.target)){
                 if (document.getElementById("cross").contains(e.target)){
                     document.getElementById("phoneNumber").style.display = "none";
@@ -49,78 +49,74 @@ const TopNav = () => {
             }
             else{
                 document.getElementById("phoneNumber").style.display = "none";
-
             }
         }
     });
 
     return (
-        <div className="topnav">
+        <div className={styles.topnav}>
             <BrowserView>
-                <a href="/" ><img height="100%" width="auto" src="/static/img/logo.png" style={{ verticalAlign: "middle", position: "relative", top: "-5px" }} /></a>
+                <a href="/"><img className={styles.logo} src="/static/img/logo.png"/></a>
             </BrowserView>
-            <MobileView>
-                <></>
-            </MobileView>
+
             {document.getElementById("titleInfo") == null ? (
                 <a style={{ textDecoration: "none", color: "rgb(200, 200, 200)" }} href="/" >О нас</a>
             ):(
             <Link to="titleInfo" spy={true} smooth={true} offset={-50} duration={500}>О нас</Link>
             )}
-            <Link to="catalog" spy={true} smooth={true} offset={0} duration={500}>Услуги</Link>
-            <Link to="reviews" spy={true} smooth={true} offset={-50} duration={500}>Отзывы</Link>
-            <Link to="container4photos" spy={true} smooth={true} offset={0} duration={500}>Фото</Link>
-            <Link to="contacts" spy={true} smooth={true} offset={0} duration={500}>Контакты</Link>
+            
+            <Link to={stylesCatalog.catalog} spy={true} smooth={true} offset={0} duration={500}>Услуги</Link>
+            <Link to={stylesReviews.reviews} spy={true} smooth={true} offset={-50} duration={500}>Отзывы</Link>
+            <Link to={stylesImages.container__for__photos} spy={true} smooth={true} offset={0} duration={500}>Фото</Link>
+            <Link to={stylesContacts.contacts} spy={true} smooth={true} offset={0} duration={500}>Контакты</Link>
 
-
-            <div id="phoneNumber" className="phoneNumber">
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <h4 style={{ color: "black", marginLeft: "2vh", marginBottom: "1vh" }} >Телефон организации</h4>
-                    <img id="cross" style={{ width: "3vh", height: "3vh", marginTop: "3vh", marginRight: "2vh", cursor: "pointer" }} src="/static/img/cross.png" />
+            <div id="phoneNumber" className={styles.phone__number}>
+                <div>
+                    <h4>Телефон организации</h4>
+                    <img id="cross" src="/static/img/cross.png" />
                 </div>
-                <hr style={{ border: "1px solid rgb(200, 200, 200)", marginTop: "2vh" }}/>
-                <h1 style={{ color: "black", textAlign: "center", marginTop: "5vh" }}>+7 (948) 348-10-69</h1>
+                <hr/>
+                <h1>+7 (948) 348-10-69</h1>
             </div>
 
             {isBrowser ? (
                 <div style={{ display: "flex", position: "absolute", right: "30px"  }}>
-                    <div className="topnav__contact">
-                        <div id="write" style={{ display: "flex", flexDirection: "column" }}>
-                            <img className="topnav_img" src="/static/img/contacts/message.png" />
+                    <div className={styles.topnav__contact}>
+                        <div id="write" className={styles.contact__icon}>
+                            <img src="/static/img/contacts/message.png" />
                             <p>Написать</p>
                         </div>
-                        <div id="messageMenu" className="messageMenu" style={{ display: "none" }}>
-                            <div className="messageMenu_contact">
-                                <img class="messageMenu_icon" src="/static/img/contacts/whatsapp.png" />
+
+                        <div id="messageMenu" className={styles.message__menu} style={{ display: "none" }}>
+                            <div className={styles.message__menu__contact}>
+                                <img class={styles.message__menu__icon} src="/static/img/contacts/whatsapp.png" />
                                 <p>WhatsApp</p>
                             </div>
-                            <div className="messageMenu_contact">
-                                <img class="messageMenu_icon" src="/static/img/contacts/viber.png" />
+                            <div className={styles.message__menu__contact}>
+                                <img class={styles.message__menu__icon} src="/static/img/contacts/viber.png" />
                                 <p>Viber</p>
                             </div>
-                            <div className="messageMenu_contact">
-                                <img class="messageMenu_icon" src="/static/img/contacts/tg.png" />
+                            <div className={styles.message__menu__contact}>
+                                <img class={styles.message__menu__icon} src="/static/img/contacts/tg.png" />
                                 <p>Telegram</p>
                             </div>
                         </div>
                     </div>
 
-                    <div id="call" className="topnav__contact">
-                        <img className="topnav_img" src="/static/img/contacts/phone.png" />
-                        <p>Позвонить</p>
+                    <div className={styles.topnav__contact}>
+                        <div id="call" className={styles.contact__icon}>
+                            <img src="/static/img/contacts/phone.png" />
+                            <p>Позвонить</p>
+                        </div>
                     </div>
 
-                    <div id="online" onClick={bookedOnline} >
+                    <div id={styles.online} onClick={bookedOnline} >
                         <a>Записаться онлайн</a>
                     </div>
                 </div>
             ):(
                 <></>
             )}
-
-
         </div>
     );
 };
-
-export default TopNav;
