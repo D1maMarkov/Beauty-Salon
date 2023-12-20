@@ -38,19 +38,21 @@ export const Reviews = () => {
                     <h3 style={{ color: "black", fontSize: "6vw", position: "relative", top: "50%", transform: "translate(0%, -50%)", margin: "0px" }} >Отзывы</h3>
                 </MobileView>
                 
-                <div style={{ display: "flex" }}>
-                    <div style={{ display: "table", marginRight: "2vw"  }}>
-                        <h3 style={{ display: "table-cell", fontSize: "6vh", marginRight: "2vw" }} >{ count }</h3>
+                <div style={{ display: "flex", marginTop: "4vh" }}>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <h3>{ count }</h3>
                     </div>
-                    <div className={styles.star__rate}>
-                        <div>
-                            <img src="static/img/yellow.png" />
-                            <img src="static/img/yellow.png" />
-                            <img src="static/img/yellow.png" />
-                            <img src="static/img/yellow.png" />
-                            <img src="static/img/yellow.png" />
+                    <div className={styles.star__rate__wrapper}>
+                        <div className={styles.star__rate}> 
+                            <div>
+                                <img src="static/img/yellow.png" />
+                                <img src="static/img/yellow.png" />
+                                <img src="static/img/yellow.png" />
+                                <img src="static/img/yellow.png" />
+                                <img src="static/img/yellow.png" />
+                            </div>
+                            <p><a>{ len }</a><a>Отзыва</a></p>
                         </div>
-                        <p><a>{ len }</a><a>Отзыва</a></p>
                     </div>
                 </div>
 

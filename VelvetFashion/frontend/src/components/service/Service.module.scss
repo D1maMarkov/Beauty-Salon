@@ -13,25 +13,28 @@
 }
 
 .service{
-    width: 22%;
-    aspect-ratio: 3/4;
+    width: 20%;
     margin: 1.5%;
-    background-color: rgb(200, 200, 200);
-    border-radius: 15px;
-    font-size: 1.1em;
-    cursor: pointer;
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+    font-size: 1.5vw;
+    box-shadow: -3px 3px 6px 3px rgba(150, 150, 150, .4);
+    transition: .2s;
+    padding: 1%;
+
+    &:hover{
+        transform: scale(1.05);
+        box-shadow: -4px 4px 8px 5px rgba(150, 150, 150, .4);
+    }
 
     img{
-        width: 90%;
+        width: 100%;
         aspect-ratio: 1/1;
-        margin: 5%;
-        margin-bottom: 0;
         pointer-events: none;
     }
 
-    div{
-        width: 90%;
-        margin-left: 6%;
+    a{
+        font-size: 2.5vh;
     }
 }
 
@@ -51,12 +54,15 @@
 
     a{
         vertical-align: middle;
+        font-size: 2.5vh;
     }
 }
 
 @media (pointer:none), (pointer:coarse) {
     .service{
         min-width: 41vw;
-        font-size: 1.3em;
+        font-size: 4vw;
+        margin: 2.5%;
+        padding: 2%;
     }
 }

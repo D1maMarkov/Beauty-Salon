@@ -1,5 +1,7 @@
 import React from "react";
+import { isBrowser } from 'react-device-detect';
 import styles from "./Footer.module.scss";
+
 
 export const Footer = () => {
     function up(){
@@ -10,7 +12,11 @@ export const Footer = () => {
         <footer>
             <p>©2023 салон красоты "Velvet Fashion"</p>
 
-            <button onClick={up} ><a>{"<"}</a></button>
+            {isBrowser ? (
+                <button onClick={up} ><a>{"<"}</a></button>
+            ):(
+                <></>
+            )}
         </footer>
     );
 };

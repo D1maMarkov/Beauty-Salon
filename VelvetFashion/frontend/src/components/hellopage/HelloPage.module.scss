@@ -6,6 +6,13 @@
     height: 108vh;
     overflow: hidden;
 
+    -webkit-touch-callout: none; 
+        -webkit-user-select: none; 
+        -khtml-user-select: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none;
+                user-select: none;
+
     h5{
         font-family: 'Caveat', cursive;
         color: #d907e6;
@@ -17,6 +24,7 @@
     margin-top: 8vh;
     color: white;
     margin-left: 13vw;
+    z-index: 1;
 
     ul, li{
         font-size: 3vh;
@@ -76,9 +84,8 @@
 @media (pointer:none), (pointer:coarse) {
     #model{
         opacity: 0.35;
-        z-index: 0;
-        right: -90vw;
-        width: 150vw;
+        right: -100vw;
+        width: 160vw;
         height: auto;
         margin-top: 15vw;
     }
@@ -89,21 +96,27 @@
     }
 
     #title__info ul, li{
-        font-size: 2vh;
+        font-size: 2vw;
     }
 
     #title__info h2{
-        font-size: 5vh;
-        margin-bottom: 2vh;
-        margin-top: 2vh;
+        font-size: 6vw;
+        margin-bottom: 2vw;
+        margin-top: 2vw;
     }
 
     .hello__page{
-        height: 80vh;
+        height: 155vw;
 
         h5{
-            margin-top: 3vh;
-            margin-bottom: 3vh;
+            margin-top: 4vw;
+            margin-bottom: 4vw;
+        }
+    }
+
+    .container__for__icon{
+        img{
+            height: 10vw;
         }
     }
 }

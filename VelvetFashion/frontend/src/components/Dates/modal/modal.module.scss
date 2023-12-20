@@ -30,10 +30,10 @@
         margin-top: 4vh;
         color: white;
         cursor: pointer;
+        transition: .2s;
     
         &:hover{
             filter: brightness(80%);
-            transition: .2s;
         }
     }
 }

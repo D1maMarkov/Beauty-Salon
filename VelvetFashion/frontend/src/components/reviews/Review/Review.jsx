@@ -14,7 +14,7 @@ export const Review = ({review}) => {
                     <img src="/static/img/yellow.png" />
                     <img src="/static/img/yellow.png" />
                     <img src="/static/img/yellow.png" />
-                    <p style={{ marginLeft: "10px"}} >{ review.date }</p>
+                    <p>{ review.date }</p>
                 </div>
                 <div style={{width: "80%", display: "flex", position: "relative"}} ><a>{review.body}</a></div>
             </div>

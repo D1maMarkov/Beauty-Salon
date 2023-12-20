@@ -6,7 +6,7 @@ export const Contacts = () => {
     return (
         <div id={styles.contacts}>
             <h2>Контакты</h2>
-            <p>Санкт-Петербург, улица Варшавская</p>
+            <p style={{ fontSize: "3vh" }} >Санкт-Петербург, улица Варшавская</p>
             <div style={{ display: "flex", flexWrap: "wrap" }}>
                 <div className={styles.contact}>
                     <img src="/static/img/contacts/phone.png" />

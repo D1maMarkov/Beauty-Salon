@@ -7,8 +7,34 @@
         color: black;
         margin-left: 4%;
     }
+}
+
+.images__wrapper{
+    flex-direction: column; 
+    width: 94%;
+    margin-left: 3%;
 
     div{
         display: flex;
+    }
+}
+
+.images__wrapper__mobile{
+    width: 100%;
+    overflow-x: scroll;
+    padding: 3%;
+    white-space: nowrap;
+
+    div{
+        display: inline-block;
+        margin: 2vw;
+        height: 45vh;
+    }
+}
+
+@media (pointer:none), (pointer:coarse) {
+    #container__for__photos{
+        padding: 2%;
+        margin-top: 35px;
     }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./ChoiceService.module.scss";
 import { isMobile } from "react-device-detect";
+import styles from "./ChoiceService.module.scss";
 
 
 export const ChoiceService = ({service}) => {

@@ -47,7 +47,10 @@ export const ServicePage = () => {
                 <Topnav />
             ):(<></>)}
             
+            <Topnav />
+            
             {service != null ? (
+                <>
                 <div className={isBrowser ? styles.content__desktop : styles.content__mobile}>
                     <div>
                         <div onClick={() => navigate(-1)} id={styles.back__to__catalog} >
@@ -71,6 +74,7 @@ export const ServicePage = () => {
                         </div>
                     </div>
                 </div>
+                </>
             ):(
                 <></>
             )}

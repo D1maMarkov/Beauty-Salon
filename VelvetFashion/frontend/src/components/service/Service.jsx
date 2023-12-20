@@ -12,12 +12,14 @@ export const Service = ({service}) => {
     }
 
     return (
-        <div className={styles.service} onClick={go2Service} >
+        <div className={styles.service}>
             <img src={service.photo} />
             <div>
-                <p style={{ marginBottom: "0px" }} >{ service.category.title }</p>
+                <p style={{ marginBottom: "0px", marginTop: "10px" }} >{ service.category.title }</p>
                 <p style={{ fontWeight: "bold", marginTop: "5px" }}>{ service.title }</p>
-                <p style={{ fontWeight: "bold" }}>{ service.price } ₽</p>
+                <p style={{ fontWeight: "bold", margin: "5px 0px" }}>{ service.price } ₽</p>
+
+                <a href="#" onClick={go2Service}>Подробнее</a>
             </div>
         </div>
     );

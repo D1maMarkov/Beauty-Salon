@@ -2,7 +2,7 @@
     position: fixed;
     background: linear-gradient(to bottom right, #d907e6, 70%, #f666ff);
     border: none;
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 2vw;
     height: 10vw;
     color: white;
@@ -13,9 +13,9 @@
     width: 80vw;
     font-size: 3vw;
     box-shadow: -3px 3px 6px 3px rgba(100, 100, 100, .3);
+    transition: 0.3s;
 
     &:hover{
         background: linear-gradient(to bottom right, #890091, 70%, #d907e6);
-        transition: 0.3s;
     }
 }

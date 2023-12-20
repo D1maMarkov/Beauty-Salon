@@ -1,19 +1,20 @@
 #catalog{
     display: flex;
     flex-direction: column;
-}
 
-.catalog h3{
-    color: black;
-    font-size: 2.7vw;
-    margin-bottom: 10px;
+    h3{
+        color: black;
+        font-size: 2.7vw;
+        margin-bottom: 10px;
+    }
 }
 
 .service__title{
     display: flex;
+    justify-content: space-between;
     
     p{
-        margin-right: 20px;
+        margin-right: 2vw;
         font-size: 2vw;
         display: block;
         position: relative;
@@ -45,9 +46,8 @@
 }
 
 #next__page{
-    position: absolute;
-    right: 50px;
     display: flex;
+    align-items: center;
 
     p{
         pointer-events: none;
@@ -55,21 +55,20 @@
 }
 
 .next__circle{
-    margin-top: 15%;
     background-color: rgb(200, 200, 200);
     border-radius: 50%;
     width: 3vw;
     height: 3vw;
-    text-align: center;
     margin-right: 5px;
     opacity: .5;
-    pointer-events: none;
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    a{
-        font-size: 2vw;
-        line-height: 3vw;
-        width: 3vw;
-    }
+.categories__wrapper{
+    display: flex;
 }
 
 .active__circle{
@@ -82,6 +81,8 @@
     display: flex;
     width: 94%;
     margin-left: 3%;
+    overflow-x: auto;
+    padding: 1vw 0;
 }
 
 @media (pointer:none), (pointer:coarse) {
@@ -89,7 +90,7 @@
         margin-right: 20px;
         font-size: 4vw;
     }
-    .catalog h3{
+    #catalog h3{
         font-size: 7vw;
     }
 }

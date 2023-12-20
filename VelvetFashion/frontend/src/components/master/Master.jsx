@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import { Review } from "../reviews/Review/Review";
-import stylesReview from "../reviews/Reviews.module.scss";
 import { BrowserView, MobileView } from 'react-device-detect';
 import styles from "./Master.module.scss";
 
@@ -17,6 +16,8 @@ export const Master = () => {
     const [reviews, setReviews] = useState([]);
     const [master, setMaster] = useState();
 
+    const [openReviews, setOpenReviews] = useState(false);
+
     function getReviews(){
         let xhttp = new XMLHttpRequest();
         xhttp.responseType = 'json';
@@ -30,18 +31,19 @@ export const Master = () => {
         xhttp.send();
     }
 
-    function openReviews(){
-        document.getElementById(styles.reviews__to__master).style.display = "block";
-        document.getElementById(styles.reviews__to__master).classList.add(stylesReview.open__reviews);
-        setTimeout(() => document.getElementById(styles.reviews__to__master).style.display = "block", 490);
-        setTimeout(() => document.getElementById(styles.reviews__to__master).classList.remove(stylesReview.open__reviews), 490);
+    function changeReviews(){
+        const reviews = document.getElementById(styles.reviews__to__master);
+        if (openReviews){
+            reviews.style.right = "0vw";
+            reviews.style.boxShadow = "0 0 0 200vw rgba(0,0,0,0.3)";
+        }
+        else{
+            reviews.style.right = "-40vw";
+            reviews.style.boxShadow = "none";
+        }
     }
 
-    function closeReviews(){
-        document.getElementById(styles.reviews__to__master).classList.add(stylesReview.close__reviews);
-        setTimeout(() => document.getElementById(styles.reviews__to__master).style.display = "none", 490);
-        setTimeout(() => document.getElementById(styles.reviews__to__master).classList.remove(stylesReview.close__reviews), 490);
-    }
+    useEffect(changeReviews, [openReviews]);
 
     function getMaster(){
         let xhttp = new XMLHttpRequest();
@@ -69,15 +71,15 @@ export const Master = () => {
     return (
         <>
             <BrowserView>
-                <div style={{ display: "none" }} id={styles.reviews__to__master}>
-                    <img onClick={closeReviews} id={styles.cross} src="/static/img/cross.png" />
+                <div id={styles.reviews__to__master}>
+                    <img onClick={() => setOpenReviews(false)} id={styles.cross} src="/static/img/cross.png" />
                     <div style={{ width: "80%", margin: "10%" }} >
                         <h2>Отзывы</h2>
                         {reviews.length > 0 ? (
                             reviews.map(review =>
                                 <Review review={review} />
                         )):(
-                            <a>.</a>
+                           <></>
                         )}
                     </div>
                 </div>
@@ -87,7 +89,7 @@ export const Master = () => {
                 <div style={{ width: "90%",  margin: "5%", marginTop: "5vh", marginLeft: "8%", marginBottom: "0px", display: "flex"}}>
                     <div className={styles.container__for__master}>
                         <img id={styles.master} src={master.photo} />
-                        <div onClick={openReviews} id={styles.container__for__response}>
+                        <div onClick={() => setOpenReviews(!openReviews)} id={styles.container__for__response}>
                             <div className={styles.response}>
                                 <img src="/static/img/contacts/speech.png"/>
                             </div>

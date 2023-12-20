@@ -4,9 +4,9 @@
     background-color: white;
     position: absolute;
     top: 0px;
-    right: 0vw;
-    box-shadow: 0 0 0 1600px rgba(0,0,0,0.3);
-    z-index: 493409579846845784;
+    right: -40vw;
+    transition: .5s;
+    z-index: 2;
 }
 
 .back__to__service__master{
@@ -20,11 +20,12 @@
     font-weight: bold;
     border: none;
     border-radius: 50%;
+    z-index: 1;
     text-align: center;
     font-size: 5vh;
     box-shadow: -1px 1px 6px 3px rgba(150, 150, 150, .4);
-    z-index: 1;
     cursor: pointer;
+    transition: .2s;
 
     a{
         vertical-align: middle;
@@ -32,7 +33,6 @@
 
     &:hover{
         transform: scale(1.1);
-        transition: .2s;
     }
 }
 
@@ -43,11 +43,12 @@
     border: 2px solid rgb(170, 170, 170);
     top: 2vh;
     left: 2vw;
+    z-index: -1;
 }
 
 .container__for__master{
     height: 90vh;
-    display: flex;
+    position: relative;
 }
 
 #master{
@@ -63,24 +64,22 @@
     position: absolute;
     width: 23vh;
     height: 23vh;
-    bottom: 7vh;
+    bottom: 0;
     margin-left: 0%;
     cursor: pointer;
-    z-index: 598695403;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
 
     &:hover{
         transform: scale(1.1);
-        transition: 0.2s;
     }
 }
 
 .response{
-    position: absolute;
     width: 13vh;
     height: 13vh;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background: linear-gradient(to bottom right, #e558c9, 20%, #6f0076);
     border-radius: 50%;
     align-items: center;
@@ -112,11 +111,8 @@
 .container__for__master__icon{
     display: flex;
     margin-right: 15px;
-
-    p{
-        margin-top: 3.5vh;
-        font-size: 2.5vh;
-    }
+    align-items: center;
+    font-size: 2.5vh;
 }
 
 .master__circle{

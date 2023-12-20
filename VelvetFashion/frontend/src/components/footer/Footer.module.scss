@@ -8,6 +8,7 @@ footer{
 
     p{
         padding-top: 5vh;
+        font-size: 2vh;
     }
 
     button{
@@ -20,6 +21,7 @@ footer{
         cursor: pointer;
         border-radius: 50%;
         box-shadow: -3px 3px 6px 3px rgba(150, 150, 150, .6);
+        transition: .3s;
 
         a{
             writing-mode: tb-rl;
@@ -29,7 +31,6 @@ footer{
         }
 
         &:hover{
-            transition: .3s;
             transform: scale(1.2);
         }
     }

@@ -9,7 +9,6 @@ import json
 
 logger = logging.getLogger("main")
 
-
 def logging_decorator(func):
     def wrapper(request, *args, **kwargs):
         try:
@@ -24,32 +23,28 @@ def logging_decorator(func):
  
 @ratelimit(key='ip', rate='15/m', block=True)
 def index(request, *args, **kwargs):
-    logger.info("index")
     return render(request, "frontend/index.html")
 
 
+@logging_decorator
 @ratelimit(key='ip', rate='15/m', block=True)
 def get_booked_online(request, name, secondname, phone, date, month, time, service_id):
-    logger.info("getBookedOnline")
-    try:
-        service = Service.objects.get(id=service_id)
-        notations = Notation.objects.filter(date=date, month=month, time=time, service=service)
-        if len(notations) > 0:
-            return HttpResponse(status=202)
+    service = Service.objects.get(id=service_id)
+    notations = Notation.objects.filter(date=date, month=month, time=time, service=service)
+    if len(notations) > 0:
+        return HttpResponse(status=202)
 
-        notation = Notation.objects.create(
-            name=name, 
-            secondname=secondname, 
-            phone=phone, 
-            date=date,
-            month=month,
-            time=time, 
-            service=service
-        )
-        notation.save()
-        
-    except Exception as e:
-        logger.error(e)
+    notation = Notation.objects.create(
+        name=name, 
+        secondname=secondname, 
+        phone=phone, 
+        date=date,
+        month=month,
+        time=time, 
+        service=service
+    )
+    notation.save()
+   
 
     return HttpResponse(status=200)
 

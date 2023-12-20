@@ -1,41 +1,42 @@
 .logo{
-    height: 92%;
-    margin-top: 3%;
+    height: 7vh;
+    cursor: pointer;
 }
 
 .topnav{
-    width: 100vw;
+    width: calc(100% - 30px);
     height: 8vh;
     position: fixed;
     top: 0px;
     background-color: rgba(100, 100, 100, .8);
     color: rgb(200, 200, 200);
-    z-index: 999;
+    z-index: 2;
     display: flex;
     backdrop-filter: blur(4px);
+    align-items: center;
+    padding: 0px 15px;
+    justify-content: space-between;
 
     a{
-        margin-top: 2.5vh;
         font-size: 2.5vh;
         margin-right: 20px;
         margin-left: 20px;
         cursor: pointer;
+        transition: .2s;
 
         &:hover{
             color: white;
-            transition: .2s;
         }
     }
 }
 
 .phone__number{
-    display: none;
     position: sticky;
     width: 50vh;
     height: 28vh;
     background-color: white;
     border-radius: 20px;
-    margin-top: 38vh;
+    margin-top: 50%;
     left: 50%;
     transform: translate(-50%, 0%);
     box-shadow: 0 0 0 100vw rgba(0,0,0,0.3);
@@ -71,8 +72,12 @@
     }
 }
 
+.topnav__segment{
+    display: flex;
+    align-items: center;
+}
+
 .topnav__contact{
-    padding: 7px;
     font-size: 2vh;
     margin-right: 3vh;
     cursor: pointer;
@@ -110,10 +115,10 @@
     display: flex;
     text-align: left;
     padding: 5px;
+    transition: .15s;
 
     &:hover{
         background-color: rgb(230, 230, 230);
-        transition: .15s;
     }
 
     p{
@@ -148,14 +153,13 @@
     border: none;
     border-radius: 5px;
     padding: 1.5vh;
-    margin-top: 1vh;
     height: 3vh;
     color: white;
     cursor: pointer;
+    transition: 0.3s;
 
     &:hover{
         background: linear-gradient(to bottom right, #890091, 70%, #d907e6);
-        transition: 0.3s;
     }
 }
 

@@ -4,6 +4,10 @@
     margin-left: 4%;
 }
 
+h2{
+    font-size: 4vh;
+}
+
 .contact{
     display: flex;
     background-color: rgb(220, 220, 220);
@@ -11,24 +15,22 @@
     border-radius: 12px;
     padding: 1.5vh;
     height: 4vh;
-    color: #4d4d4d;
     cursor: pointer;
     margin: 20px;
     margin-left: 0px;
     font-size: 3.5vh;
+    align-items: center;
 
     p{
         margin: 0px;
     }
 
-    img {
-        margin-top: -0.5vh;
+    img{
         width: 5vh;
         height: 5vh;
         margin-right: 1vw;
     }
 }
-
 
 @media (pointer:none), (pointer:coarse) {
     #contacts{
@@ -36,17 +38,14 @@
     }
     .contact{
         font-size: 4vw;
-        padding: 1vw;
-        margin: 10px;
+        padding: 2vw;
+        margin: 5px;
+        height: 5vw;
+        border-radius: 9px;
     
         img {
-            margin-top: 0.7vw;
             width: 5vw;
             height: 5vw;
-        }
-
-        p{
-            margin-top: 1vw;
         }
     }
 }

@@ -7,6 +7,7 @@
     border-radius: 15px;
     padding: 5px;
     box-shadow: -1px 1px 6px 3px rgba(150, 150, 150, .2);
+    font-size: 2.3vh;
 
     #master__img__for__booked{
         height: 10vh;
@@ -17,12 +18,19 @@
     }
 }
 
-.star{
-    position: relative;
-    top: 0.5vh;
-    width: 3vh;
-    height: 3vh;
-    margin-right: 5px;
+.star__rate{
+    display: flex;
+    align-items: center;
+    
+    img{
+        width: 3vh;
+        height: 3vh;
+        margin-right: 5px;
+    }
+
+    a{
+        margin-left: 10px;
+    }
 }
 
 .booked__button{
@@ -34,6 +42,7 @@
     margin: 5vh;
     color: white;
     cursor: pointer;
+    font-size: 2vh;
 
     &:hover{
         background: linear-gradient(to bottom right, #890091, 70%, #d907e6);
@@ -59,6 +68,7 @@
         margin-right: 0.25vh
     }
 }
+
 
 @media (pointer:none), (pointer:coarse) {
     .detailed{

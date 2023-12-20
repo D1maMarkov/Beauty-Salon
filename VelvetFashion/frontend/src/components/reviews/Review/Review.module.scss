@@ -27,11 +27,17 @@
 
     .star__rate{
         display: flex;
+        align-items: center;
+        margin-top: 2vh;
     
         img{
-            margin-top: 2.5vh;
             width: 15px;
             height: 15px;
+        }
+
+        p{
+            margin: 0px;
+            margin-left: 10px;
         }
     }
 }
