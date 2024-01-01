@@ -48,7 +48,7 @@ export const Catalog = () => {
         }
         
         document.getElementById("category" + param).classList.add(styles.active__p);
-        setServices([...allServices].filter(service => String(service.category.id).includes(param)));
+        setServices([...allServices].filter(service => String(service.category).includes(param)));
     }
 
     useEffect(() => {

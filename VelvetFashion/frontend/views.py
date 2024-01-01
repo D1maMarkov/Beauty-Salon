@@ -34,7 +34,7 @@ def get_booked_online(request, name, secondname, phone, date, month, time, servi
     if len(notations) > 0:
         return HttpResponse(status=202)
 
-    notation = Notation.objects.create(
+    Notation.objects.create(
         name=name, 
         secondname=secondname, 
         phone=phone, 
@@ -43,17 +43,16 @@ def get_booked_online(request, name, secondname, phone, date, month, time, servi
         time=time, 
         service=service
     )
-    notation.save()
-   
 
     return HttpResponse(status=200)
+
 
 @logging_decorator
 @ratelimit(key='ip', rate='15/m', block=True)
 def get_reviews(request):
     logger.info("getReviews")
     
-    reviews_json = list(Reviews.objects.all())
+    reviews_json = list(Review.objects.all())
     reviews = []
     for i in range(len(reviews_json)):
         review = model_to_dict(reviews_json[i])
@@ -67,15 +66,13 @@ def get_reviews(request):
 
 @logging_decorator
 @ratelimit(key='ip', rate='15/m', block=True)
-def get_reviews_to_master(request, id):
-    logger.info("getReviews2Master")
-    
+def get_reviews_to_master(request, id):  
     reviews = []
-    reviews_json = list(Master.objects.get(id=id).reviewtomaster_set.all())
-    for i in range(len(reviews_json)):
-        review = model_to_dict(reviews_json[i])
-        review["username"] = model_to_dict(reviews_json[i].username)
-        review["username"]["photo"] = reviews_json[i].username.photo.url
+    reviews_json = Master.objects.get(id=id).reviewtomaster_set.all()
+    for review_json in reviews_json:
+        review = model_to_dict(review_json)
+        review["username"] = model_to_dict(review_json.username)
+        review["username"]["photo"] = review_json.username.photo.url
         
         reviews.append(review)
         
@@ -88,7 +85,6 @@ def get_service(request, id):
     service = Service.objects.get(id=id)
     service_json = model_to_dict(service)
     service_json["photo"] = service.photo.url
-    service_json["category"] = model_to_dict(Category.objects.get(id=service_json["category"]))
 
     return HttpResponse(json.dumps(service_json))
 
@@ -111,12 +107,12 @@ def get_busy_times(request, service_id):
 @logging_decorator
 @ratelimit(key='ip', rate='15/m', block=True)
 def get_services(request):
-    services = list(Service.objects.all())
+    services = Service.objects.all()
     services_json = []
-    for i in range(len(services)):
-        service = model_to_dict(services[i])
-        service["category"] = model_to_dict(services[i].category)
-        service["photo"] = service["photo"].url
+    
+    for service_json in services:
+        service = model_to_dict(service_json)
+        service["photo"] = service_json.photo.url
         services_json.append(service)
     
     return HttpResponse(json.dumps(services_json))
@@ -125,7 +121,7 @@ def get_services(request):
 @logging_decorator
 @ratelimit(key='ip', rate='15/m', block=True)        
 def get_categories(request):
-    categories = list(Category.objects.all())
+    categories = Category.objects.all()
     categories_json = list(map(model_to_dict, categories))
         
     return HttpResponse(json.dumps(categories_json))
@@ -136,10 +132,10 @@ def get_categories(request):
 def get_masters(request, category_id):
     masters = Category.objects.get(id=category_id).master_set.all()
     masters_json = []
-    for i in range(len(masters)):
-        master = model_to_dict(masters[i])
-        master["photo"] = masters[i].photo.url
-        masters_json.append(master)
+    for master in masters:
+        master_json = model_to_dict(master)
+        master_json["photo"] = master.photo.url
+        masters_json.append(master_json)
         
     return HttpResponse(json.dumps(masters_json))
     
@@ -147,9 +143,23 @@ def get_masters(request, category_id):
 @logging_decorator
 @ratelimit(key='ip', rate='15/m', block=True)
 def get_master(request, id):
-    master = Master.objects.get(id=int(id))
+    master = Master.objects.get(id=id)
     master_json = model_to_dict(master)
     master_json["photo"] = master.photo.url
     
     return HttpResponse(json.dumps(master_json))
+
+
+@logging_decorator
+@ratelimit(key='ip', rate='15/m', block=True)
+def get_images(request, iter):
+    images = Image.objects.all().order_by('id')[iter * 6: (iter + 1) * 6]
+    
+    one_more = (iter + 1) * 6 <= Image.objects.count()
+
+    images_json = list(map(lambda x: x.image.url, images))
+    
+    response = {'one_more': one_more, 'images': images_json}
+    
+    return HttpResponse(json.dumps(response))
     

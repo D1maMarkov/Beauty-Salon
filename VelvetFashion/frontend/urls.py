@@ -13,6 +13,7 @@ urlpatterns = [
     path("get-categories", get_categories),
     path("get-master/<int:id>", get_master),
     path("get-service/<int:id>", get_service),
+    path('get-images/<int:iter>', get_images),
     path("get-masters/<int:category_id>", get_masters),
     path("get-busy-times/<int:service_id>", get_busy_times),
     path('get-reviews-to-master/<int:id>', get_reviews_to_master),

@@ -32,11 +32,17 @@ choice_month = [
 class Category(models.Model):
     title =  models.CharField(max_length=150)
     
+    def __str__(self):
+        return self.title
+    
 class Service(models.Model):
     title = models.CharField(max_length=150)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='servicePhotos/%Y/%m/%d', blank=False, null=True)
     price = models.IntegerField()
+    
+    def __str__(self):
+        return self.title
     
 class CustomUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -59,7 +65,7 @@ class Master(models.Model):
     biography = models.CharField(max_length=50000)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     
-class Reviews(models.Model):
+class Review(models.Model):
     username = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
     date = models.CharField(max_length=150, null=True)
     estimation = models.IntegerField(null=True)
@@ -71,3 +77,9 @@ class ReviewToMaster(models.Model):
     estimation = models.IntegerField(null=True)
     body = models.CharField(max_length=1500, null=True)
     master = models.ForeignKey(Master, on_delete=models.CASCADE, null=True)
+    
+class Image(models.Model):
+    image = models.ImageField(upload_to='imagesMainPage/%Y/%m/%d')
+    
+    
+    

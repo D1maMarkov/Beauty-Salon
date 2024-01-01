@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Review } from "./Review/Review";
-import { BrowserView, MobileView } from 'react-device-detect';
+import { isBrowser } from 'react-device-detect';
 import styles from "./Reviews.module.scss";
 
 
@@ -30,13 +30,7 @@ export const Reviews = () => {
     return (
         <div id={styles.reviews} >
             <div style={{ width: "90%", marginLeft: "4%" }}>
-                <BrowserView>
-                    <h3 style={{ color: "black", fontSize: "3vw" }}>Отзывы</h3>
-                </BrowserView>
-
-                <MobileView>
-                    <h3 style={{ color: "black", fontSize: "6vw", position: "relative", top: "50%", transform: "translate(0%, -50%)", margin: "0px" }} >Отзывы</h3>
-                </MobileView>
+                <h3 className={styles.title}>Отзывы</h3>
                 
                 <div style={{ display: "flex", marginTop: "4vh" }}>
                     <div style={{ display: "flex", alignItems: "center" }}>
@@ -56,41 +50,11 @@ export const Reviews = () => {
                     </div>
                 </div>
 
-                <BrowserView>
-                    <div style={{ display: "flex"}}>
-                        <div style={{ display: "flex", flexDirection: "column", width: "50%", marginRight: "3%" }} >
-                            {allReviews.length > 0 ? (
-                                   allReviews.slice(0, (allReviews.length / 2 + (allReviews.length % 2))).map(review =>
-                                    <Review review={review} />
-                                    )
-                            ) : (
-                                <></>
-                            )}
-                        </div>
-                        <div style={{ display: "flex", flexDirection: "column", width: "50%" }} >
-                            {allReviews.length > 0 ? (
-                                   allReviews.slice(allReviews.length / 2 + (allReviews.length % 2), allReviews.length).map(review =>
-                                    <Review review={review} />
-                                    )
-                            ) : (
-                                <></>
-                            )}
-                        </div>
-                    </div>
-                </BrowserView>
-
-                <MobileView>
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                        {allReviews.length > 0 ? (
-                               allReviews.slice(0, 3).map(review =>
+                <div style={isBrowser ? { columns: "2" } : { display: "flex", flexDirection: "column" }}>
+                        {allReviews.map(review =>
                                 <Review review={review} />
-                                )
-                        ) : (
-                            <></>
                         )}
-                    </div>
-                </MobileView>
-
+                </div>
             </div>
         </div>
     );

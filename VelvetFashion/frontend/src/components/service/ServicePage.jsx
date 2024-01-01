@@ -30,7 +30,7 @@ export const ServicePage = () => {
                 setMasters(xhttp.response);
             }
         }
-        xhttp.open("GET", "/get-masters/" + service.category.id);
+        xhttp.open("GET", "/get-masters/" + service.category);
         xhttp.send();
     }
 
@@ -50,7 +50,6 @@ export const ServicePage = () => {
             <Topnav />
             
             {service != null ? (
-                <>
                 <div className={isBrowser ? styles.content__desktop : styles.content__mobile}>
                     <div>
                         <div onClick={() => navigate(-1)} id={styles.back__to__catalog} >
@@ -74,7 +73,6 @@ export const ServicePage = () => {
                         </div>
                     </div>
                 </div>
-                </>
             ):(
                 <></>
             )}
