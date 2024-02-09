@@ -5,7 +5,6 @@ import styles from "./MobileBooked.module.scss";
 
 
 const MobileBooked = () => {
-
     const navigate = useNavigate();
 
     function bookedOnline(){

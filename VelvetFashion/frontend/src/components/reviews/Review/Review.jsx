@@ -6,7 +6,7 @@ export const Review = ({review}) => {
     return (
         <div style={{ display: "inline-block"}}>
             <div className={styles.review}>
-                <img className={styles.review__img} src={review.username.photo } />
+                <img className={styles.logo} src={review.username.photo } />
                 <div className={styles.review__body}>
                     <p>{ review.username.username }</p>
                     <div className={styles.star__rate}>
@@ -17,7 +17,9 @@ export const Review = ({review}) => {
                         <img src="/static/img/yellow.png" />
                         <p>{ review.date }</p>
                     </div>
-                    <div style={{width: "80%", display: "flex", position: "relative"}} ><a>{review.body}</a></div>
+                    <div style={{width: "90%", display: "flex", position: "relative"}} >
+                        <a>{review.body}</a>
+                    </div>
                 </div>
             </div>
         </div>

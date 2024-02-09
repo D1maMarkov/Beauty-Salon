@@ -1,17 +1,3 @@
-.content__desktop{
-    margin-top: 12vh;
-    margin-left: 10%;
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 15vh;
-}
-
-.content__mobile{
-    margin-top: 5vh;
-    margin-left: 10%;
-    padding-bottom: 15vw;
-}
-
 .service{
     width: 20%;
     margin: 1.5%;
@@ -34,26 +20,6 @@
     }
 
     a{
-        font-size: 2.5vh;
-    }
-}
-
-.service__description{
-    margin-top: 7vh;
-
-    p{
-        font-weight: bold;
-        margin-bottom: 5px;
-        margin-top: 5px;
-    }
-    
-}
-
-#back__to__catalog{
-    cursor: pointer;
-
-    a{
-        vertical-align: middle;
         font-size: 2.5vh;
     }
 }

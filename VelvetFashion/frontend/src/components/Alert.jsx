@@ -1,7 +1,7 @@
 import React from "react";
 import Snackbar from '@mui/material/Snackbar';
 import Stack from '@mui/material/Stack';
-import MuiAlert, { AlertColor } from "@mui/material/Alert";
+import MuiAlert from "@mui/material/Alert";
 
 
 const Alert = ({open, handleClose, severity, text}) => {

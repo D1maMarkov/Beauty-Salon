@@ -113,6 +113,7 @@ def get_services(request):
     for service_json in services:
         service = model_to_dict(service_json)
         service["photo"] = service_json.photo.url
+        service["category"] = model_to_dict(Category.objects.get(id=int(service["category"])))
         services_json.append(service)
     
     return HttpResponse(json.dumps(services_json))

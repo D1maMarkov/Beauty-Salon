@@ -1,22 +1,36 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from 'react-dom';
-import App from "./App";
-import { Master } from "./components/master/Master";
-import { Dates } from "./components/Dates/Dates";
-import { ChoiceServices } from "./components/ChoiceServices/ChoiceServices";
-import { ServicePage } from "./components/service/ServicePage";
+import Layout from "./components/layout/layout";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import "./index.css";
 
+const HomePage = lazy(() => import("./pages/home/HelloPage"))
+const MasterPage = lazy(() => import("./pages/master/Master"))
+const DatesPage = lazy(() => import("./pages/dates/Dates"))
+const ChoiceServicesPage = lazy(() => import("./pages/choiceServices/ChoiceServices"))
+const ServicePage = lazy(() => import("./pages/service/ServicePage"))
+
+const routes = [
+    { path: '/', component: <HomePage />},
+    { path: '/booked-online', component: <ChoiceServicesPage /> },
+    { path: '/create-notation/:serviceId', component: <DatesPage /> },
+    { path: '/master/:id', component: <MasterPage /> },
+    { path: '/service/:id', component: <ServicePage/> },
+];
 
 ReactDOM.render((
     <BrowserRouter>
         <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="/booked-online" element={<ChoiceServices />} />
-            <Route path="/create-notation/:serviceId" element={<Dates />} />
-            <Route path="/master/:id" element={<Master />} />
-            <Route path="/service/:id" element={<ServicePage/>} />
+            <Route path="/" element={<Suspense><Layout /></Suspense>}>
+                {routes.map((route, index) => (
+                    <Route
+                        key={index}
+                        path={route.path}
+                        element={route.component}
+                    >
+                    </Route>
+                ))}
+            </Route>
         </Routes>
     </BrowserRouter>
 ), document.getElementById("root"));

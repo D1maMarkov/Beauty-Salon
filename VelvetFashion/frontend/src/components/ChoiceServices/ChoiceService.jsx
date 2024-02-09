@@ -15,7 +15,7 @@ export const ChoiceService = ({service}) => {
     return (
         <div className={styles.choice__service}>
             <div style={{ display: "flex" }}>
-                <img src={service.photo} />
+                <img src={service.photo} alt={service.title}/>
                 <div style={{ width: "30%" }}>
                     <p style={{ marginBottom: isMobile ? "0px" : "" }}>{ service.title }</p>
                     <p style={{ marginTop: isMobile ? "0px" : "", color: "rgb(210, 210, 210)" }}>{ service.category.title }</p>

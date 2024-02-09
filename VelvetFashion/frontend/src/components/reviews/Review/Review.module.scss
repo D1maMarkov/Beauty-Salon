@@ -8,7 +8,7 @@
     max-height: 80%;
     padding-bottom: 30px;
 
-    .review__img{
+    .logo{
         margin: 3%;
         border-radius: 50%;
         width: 40px;
@@ -38,6 +38,38 @@
         p{
             margin: 0px;
             margin-left: 10px;
+        }
+    }
+}
+
+@media (pointer:none), (pointer:coarse) {
+    .review{
+        .logo{
+            width: 80px;
+            height: 80px;
+        }
+
+        .review__body{
+            a{
+                font-size: 2.5vw;
+            }
+
+            p{
+                font-size: 3.5vw; 
+            }
+        
+            .star__rate{
+                img{
+                    width: 25px;
+                    height: 25px;
+                }
+    
+                p{
+                    margin: 0px;
+                    margin-left: 10px;
+                    font-size: 3vw;
+                }
+            }
         }
     }
 }

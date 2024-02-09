@@ -10,17 +10,12 @@ export const Images = () => {
     const [oneMore, setOneMore] = useState(true);
 
     function getImages(){
-        let xhttp = new XMLHttpRequest();
-        xhttp.responseType = 'json';
-        xhttp.onreadystatechange = function(){
-            if (this.readyState == 4 && this.status == 200){
-                setImages([...images, ...xhttp.response.images]);
-                setOneMore(xhttp.response.one_more);
-            }
-        }
-
-        xhttp.open("GET", "/get-images/" + iter);
-        xhttp.send();
+        fetch("/get-images/" + iter)
+            .then(response => response.json())
+            .then(response => {
+                setImages([...images, ...response.images]);
+                setOneMore(response.one_more);
+            })
     }
 
     useEffect(getImages, [iter]);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Service } from "../service/Service";
 import { isBrowser } from 'react-device-detect';
+import { getServices } from "../../hooks/getServices";
 import styles from "./catalog.module.scss";
 
 
@@ -10,56 +11,41 @@ export const Catalog = () => {
     const [categories, setCategories] = useState([]);
     const [currentPageNumber, setCurrentPageNumber] = useState(0);
 
+    const [activeCategory, setActiveCategory] = useState(0);
+
     const [end, setEnd] = useState(0);
 
     const [increment, setIncrement] = useState(true);
     const [decrement, setDecrement] = useState(true);
 
-    function getServices(){
-        let xhttp = new XMLHttpRequest();
-        xhttp.responseType = 'json';
-        xhttp.onreadystatechange = function(){
-            if (this.readyState == 4 && this.status == 200){
-                setAllServices(xhttp.response);
-                setServices(xhttp.response);
-            }
-        }
-        xhttp.open("GET", "/get-services");
-        xhttp.send();
-    }
-
     function getCategories(){
-        let xhttp = new XMLHttpRequest();
-        xhttp.responseType = 'json';
-        xhttp.onreadystatechange = function(){
-            if (this.readyState == 4 && this.status == 200){
-                setCategories(xhttp.response);
-            }
-        }
-        xhttp.open("GET", "/get-categories");
-        xhttp.send();
+        fetch("/get-categories")
+            .then(response => response.json())
+            .then(response => {
+                setCategories(response);
+            })
     }
 
     function getFilter(param){
-        const categoriesP = document.getElementsByClassName(styles.service__title)[0].getElementsByTagName("div");
-
-        for (let i = 0; i < categoriesP.length; i++){
-            categoriesP[i].classList.remove(styles.active__p);
+        if (param === ""){
+            setActiveCategory(0);
         }
-        
-        document.getElementById("category" + param).classList.add(styles.active__p);
-        setServices([...allServices].filter(service => String(service.category).includes(param)));
+        else{
+            setActiveCategory(param);
+        }
+       
+        setServices([...allServices].filter(service => String(service.category.id).includes(param)));
     }
 
     useEffect(() => {
-        getServices();
+        getServices(setServices);
+        getServices(setAllServices);
         getCategories();
     }, []);
-    
+
     useEffect(() => {
-        currentPageNumber > 0 ? setDecrement(true) : setDecrement(false);
-        currentPageNumber < end ? setIncrement(true) : setIncrement(false);
-        
+        setDecrement(currentPageNumber > 0);
+        setIncrement(currentPageNumber < end);
     }, [currentPageNumber, end]);
     
     useEffect(() => {
@@ -74,12 +60,12 @@ export const Catalog = () => {
                 <h3>Каталог</h3>
                 <div className={styles.service__title}>
                     <div className={styles.categories__wrapper} >
-                        <div id="category" onClick={() => getFilter("")} className={styles.active__p}>
+                        <div id="category" onClick={() => getFilter("")} className={activeCategory == 0 ? styles.active__p : ""}>
                             <p>Все</p>
                         </div>
-                    
+
                         {categories.map(category => 
-                            <div id={"category" + category.id} onClick={() => getFilter(category.id)} >
+                            <div className={activeCategory == category.id ? styles.active__p : ""} onClick={() => getFilter(category.id)} >
                                 <p>{ category.title }</p>
                             </div>
                         )}
