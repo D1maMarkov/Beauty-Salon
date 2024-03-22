@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Alert from "../../../components/Alert";
 import InputLabel from '@mui/material/InputLabel';
 import FormHelperText from '@mui/material/FormHelperText';
@@ -17,39 +17,51 @@ export const Modal = ({open, setOpen, date, service}) => {
     const [phone, setPhone] = useState("");
     const [errorPhone, setErrorPhone] = useState(null);
 
-    function validForm(){
-        setErrorName(name.length == 0 ? "Введите ваше имя" : null);
-        setErrorSecondname(secondname.length == 0 ? "Введите вашу фамилию" : null);
-        setErrorPhone(phone.length == 0 ? "Введите ваш телефон" : null);
+    async function validForm(){
+        const response = await fetch(`/create-booked-online`, {
+            method: "post",
+            body: `name=${name}&secondname=${secondname}&phone=${phone}&date=${date.date}&month=${date.month}&time=${date.time}&service_id=${service}`,
+            headers: {
+                'Accept': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }})
+            .then((response) => {
+                if (!response.ok) {
+                    setOpenAlertWarning(true);
+                    throw new Error(response.status)
+                }
+            
+                return response.json()
+              })
 
-        if (name.length > 0 &&  secondname.length > 0 && phone.length > 0 && errorPhone == null){
-            fetch(`/get-booked-online/${name}/${secondname}/${phone}/${date.date}/${date.month}/${date.time}/${service}`)
-                .then(response => response.status)
-                .then(status => {
-                    if (status == 200){
-                        setOpenAlertSuccess(true);
-                        setOpen(false);
-                    }
-                    else if (status == 202){
-                        setOpenAlertWarning(true);
-                    }
-                })
-        }
-    }
-
-    function validPhone(){
-        const re = /[+][7]\d{10}/g;
-        const myArray = re.exec(phone);
-
-        if (phone.length == 0){
-            setErrorPhone(null);
-        }
-        else{
-            if (myArray && phone.length == 12){
-                setErrorPhone(null);
+        if (response !== undefined){
+            if (response.status === "valid"){
+                setOpenAlertSuccess(true);
+                setOpen(false);
             }
             else{
-                setErrorPhone("Неверный формат номера телефона");
+                const errors = response.errors
+
+                if (errors.name !== undefined){
+                    setErrorName(errors.name[0]);
+                }
+                else{
+                    setErrorName(null);
+                }
+
+                if (errors.secondname !== undefined){
+                    setErrorSecondname(errors.secondname[0])
+                }
+                else{
+                    setErrorSecondname(null)
+                }
+
+                if (errors.phone !== undefined){
+                    setErrorPhone(errors.phone[0]);
+                }
+                else{
+                    setErrorPhone(null);
+                }
             }
         }
     }
@@ -62,16 +74,6 @@ export const Modal = ({open, setOpen, date, service}) => {
 
         result.length == 0 ? setPhone("") : setPhone(result[0] == "+" ? result : "+" + result);
     }
-
-    useEffect(validPhone, [phone]);
-
-    useEffect(() => {
-        name.length > 0 ? setErrorName(null) : null;
-    }, [name])
-
-    useEffect(() => {
-        secondname.length > 0 ? setErrorSecondname(null) : null;
-    }, [secondname])
 
     const handleCloseWarning = () => {
         setOpenAlertWarning(false);
@@ -92,8 +94,7 @@ export const Modal = ({open, setOpen, date, service}) => {
         <div style={{ display: open ? "flex" : "none" }} className={styles.booked__form}>
             <img onClick={() => setOpen(false)} src="/static/img/cross.png" />
             <div style={{ width: "76%" }}>
-
-                <FormControl error={errorName == null ? false : true} variant="standard" className={styles.field}>
+                <FormControl error={errorName !== null} variant="standard" className={styles.field}>
                     <InputLabel htmlFor="name">Имя</InputLabel>
                     <Input
                         value={name}
@@ -103,7 +104,7 @@ export const Modal = ({open, setOpen, date, service}) => {
                     <FormHelperText id="name__error">{ errorName }</FormHelperText>
                 </FormControl>
 
-                <FormControl error={errorSecondname == null ? false : true} variant="standard" className={styles.field}>
+                <FormControl error={errorSecondname !== null} variant="standard" className={styles.field}>
                     <InputLabel htmlFor="component-error">Фамилия</InputLabel>
                     <Input
                         value={secondname}
@@ -113,7 +114,7 @@ export const Modal = ({open, setOpen, date, service}) => {
                     <FormHelperText id="component-error-text">{ errorSecondname }</FormHelperText>
                 </FormControl>
 
-                <FormControl error={errorPhone == null ? false : true} variant="standard" className={styles.field}>
+                <FormControl error={errorPhone !== null} variant="standard" className={styles.field}>
                     <InputLabel htmlFor="component-error">Телефон (+7)</InputLabel>
                     <Input
                         value={phone}
@@ -125,7 +126,7 @@ export const Modal = ({open, setOpen, date, service}) => {
                     <FormHelperText id="component-error-text">{ errorPhone }</FormHelperText>
                 </FormControl>
 
-                <button id="submitButton" onClick={validForm} >Подтвердить</button>
+                <button id="submitButton" onClick={validForm}>Подтвердить</button>
             </div>
         </div>
         </>

@@ -1,21 +1,24 @@
 from django.urls import path
-from .views import *
+from .views.main_page import *
+from .views.masters import *
+from .views.notation import *
+from .views.service_page import *
 
 
 urlpatterns = [
-    path('', index),
-    path('booked-online', index),
-    path('master/<master>', index),
-    path('service/<int:id>', index),
-    path('create-notation/<service>', index),
-    path('get-reviews', get_reviews),
-    path("get-services", get_services),
-    path("get-categories", get_categories),
-    path("get-master/<int:id>", get_master),
-    path("get-service/<int:id>", get_service),
-    path('get-images/<int:iter>', get_images),
-    path("get-masters/<int:category_id>", get_masters),
-    path("get-busy-times/<int:service_id>", get_busy_times),
-    path('get-reviews-to-master/<int:id>', get_reviews_to_master),
-    path('get-booked-online/<name>/<secondname>/<phone>/<int:date>/<month>/<time>/<int:service_id>', get_booked_online),
+    path('', Index.as_view()),
+    path('booked-online', Index.as_view()),
+    path('master/<master>', Index.as_view()),
+    path('service/<int:id>', Index.as_view()),
+    path('create-notation/<service>', Index.as_view()),
+    path('get-reviews', GetReviews.as_view()),
+    path("get-services", GetServices.as_view()),
+    path("get-categories", GetCategories.as_view()),
+    path("get-master/<int:id>", GetMaster.as_view()),
+    path("get-service/<int:id>", GetService.as_view()),
+    path('get-images/<int:iter>', GetImages.as_view()),
+    path("get-masters/<int:category_id>", GetMasters.as_view()),
+    path("get-busy-times/<int:service_id>", GetBusyTimes.as_view()),
+    path('get-reviews-to-master/<int:id>', GetReviewsToMaster.as_view()),
+    path('create-booked-online', CreateBookedOnline.as_view()),
 ]

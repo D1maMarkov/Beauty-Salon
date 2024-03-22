@@ -1,12 +1,12 @@
+from django.utils.safestring import mark_safe
 from django.contrib import admin
 from .models import *
-from django.utils.safestring import mark_safe
 
 
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in CustomUser._meta.fields]
-    list_editable = [f.name for f in CustomUser._meta.fields if f.name != "id"]
+    list_display = ["username", "photo"]
+    list_editable = ["username", "photo"]
     list_display_links = None
 
 @admin.register(Notation)

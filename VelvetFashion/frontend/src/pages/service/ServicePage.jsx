@@ -23,7 +23,7 @@ const ServicePage = () => {
 
     useEffect(() => {
         if (service != null){
-            getMasters(setMasters, service.category);
+            getMasters(setMasters, service.category.id);
             document.title = service.title;
         }
     }, [service]);

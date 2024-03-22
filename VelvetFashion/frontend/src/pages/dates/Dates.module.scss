@@ -54,17 +54,16 @@ nav{
     position: absolute;
     top: 25px;
     left: 25px;
-    background-color: rgb(200 ,200, 200);
+    background-color: rgb(200, 200, 200);
     width: 25px;
     height: 25px;
     border: none;
     color: white;
     cursor: pointer;
     border-radius: 50%;
-
-    a{
-        vertical-align: middle;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .active__date{

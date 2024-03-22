@@ -1,0 +1,1 @@
+[{"model": "frontend.category", "pk": 1, "fields": {"title": "Маникюр"}}, {"model": "frontend.category", "pk": 2, "fields": {"title": "Косметология"}}, {"model": "frontend.category", "pk": 3, "fields": {"title": "Стрижки"}}]

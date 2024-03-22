@@ -1,1 +1,6 @@
-/VelvetFashion/frontend/node_modules/
+VelvetFashion/frontend/node_modules/
+*.env
+__pycache__
+VelvetFashion/frontend/static/frontend/
+VelvetFashion/db.sqlite3
+VelvetFashion/information.log
